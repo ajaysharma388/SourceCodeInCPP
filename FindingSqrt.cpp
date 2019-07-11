@@ -2,7 +2,8 @@
 using namespace std;
 
 float findSqrt(int n,int p){
-	int s=0,e=n,m,ans;
+	int s=0,e=n,m;
+	float ans;
 	while(s<=e){
 		m=(s+e)/2;
 		if(m*m==n){
@@ -13,20 +14,17 @@ float findSqrt(int n,int p){
 			s=m+1;
 		}else e=m-1;
 	}
-	float sq=(float)ans,inc=1.0/10;
-	if(sq*sq==n) return sq;
-	else{
-		while(p>0){
-			sq+=inc;
-			while(sq*sq<n) sq+=inc;
-			if(sq*sq==n) break;
-			else sq-=inc;
-			inc/=10.0;
-			p--;
-		}
-		return sq;
+	float inc=1.0/10;
+	while(p>0){
+		while(ans*ans<n) ans+=inc;
+		if(ans*ans==n) break;
+		else ans-=inc;
+		inc/=10.0;
+		p--;
 	}
+	return ans;
 }
+
 int main() {
 	// your code goes here
 	int n,p;
@@ -34,3 +32,6 @@ int main() {
 	cout<<findSqrt(n,p)<<endl;
 	return 0;
 }
+
+// time compexity will be O(log 2(n)+p)
+// space complexity will be O(1)
